@@ -1,0 +1,14 @@
+.transition-container-enter {
+  opacity: 0;
+}
+.transition-container-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.transition-container-exit {
+  opacity: 1;
+}
+.transition-container-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}

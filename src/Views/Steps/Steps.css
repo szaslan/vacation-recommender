@@ -1,0 +1,28 @@
+/* /* .transition-container-appear {
+  opacity: 0;
+  transform: translateY(-20px);
+} */
+
+.step-option {
+  margin: 16px 0;
+  padding: 8px;
+  width: auto;
+  border-radius: 10px;
+  background: #f8f3fb;
+  color: #562284;
+  padding-left: 16px;
+  font-weight: 600;
+}
+.step-option:hover {
+  cursor: pointer;
+
+  background: #e5dbec;
+}
+.step-option--selected {
+  background: #85569d;
+  color: white;
+}
+
+.step-option--selected:hover {
+  background: #85569d;
+}

@@ -14,8 +14,9 @@ const Climate = ({ ContextValue }) => {
   return (
     <div>
       <Prompt promptText="Which climate would you like to go to? (Pick one)" />
-      {TEMPS.map(temp => (
+      {TEMPS.map((temp, i) => (
         <div
+          key={i}
           onClick={() =>
             ContextValue.handleChange({ field: "climate", value: temp })
           }

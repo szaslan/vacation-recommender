@@ -14,8 +14,9 @@ const Landscape = ({ ContextValue }) => {
   return (
     <div>
       <Prompt promptText="What would you like to do most? (Pick one)" />
-      {Object.entries(landscapes[selectedClimate]).map(([key, tagLine]) => (
+      {Object.entries(landscapes[selectedClimate]).map(([key, tagLine], i) => (
         <div
+          key={i}
           onClick={() =>
             ContextValue.handleChange({ field: "landscape", value: key })
           }

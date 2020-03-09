@@ -5,24 +5,37 @@
 
 .step-option {
   margin: 16px 0;
-  padding: 8px;
+  padding: 8px 16px;
   width: auto;
   border-radius: 10px;
-  background: #f8f3fb;
-  color: #562284;
-  padding-left: 16px;
+  /* background: #f8f3fb; */
+  /* color: #562284; */
+  background-color: #ececff;
+  color: #29298a;
   font-weight: 600;
 }
 .step-option:hover {
   cursor: pointer;
 
-  background: #e5dbec;
+  background-color: #d4d4f4;
 }
 .step-option--selected {
-  background: #85569d;
+  /* background: #562284; */
+  background-color: #29298a;
   color: white;
 }
 
 .step-option--selected:hover {
-  background: #85569d;
+  /* background: #562284; */
+  background-color: #29298a;
+}
+
+.rank__options-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex: 1;
+}
+
+.rank__option {
 }

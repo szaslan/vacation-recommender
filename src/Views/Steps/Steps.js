@@ -1,7 +1,12 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../../Context/GlobalContext"
 import Climate from "./Climate"
 import Landscape from "./Landscape"
+import State from "./State"
+import Location from "./Location"
+import Budget from "./Budget"
+import Rank from "./Rank"
+import Attraction from "./Attraction"
 import { queries } from "../../queries"
 import "./Steps.css"
 
@@ -30,9 +35,55 @@ const Test = ({ ContextValue }) => {
 }
 
 export const StepMap = {
-  1: <Climate />,
-  2: <Landscape />,
-  3: <Test />
+  1: <State />,
+  2: <Location />,
+  3: <Budget />,
+  4: <Attraction />,
+  5: (
+    <Rank
+      options={{
+        stringName: "nightlife",
+        plural: false,
+        contextName: "nightlife"
+      }}
+    />
+  ),
+  6: (
+    <Rank
+      options={{
+        stringName: "museums",
+        plural: true,
+        contextName: "museum"
+      }}
+    />
+  ),
+  7: (
+    <Rank
+      options={{
+        stringName: "proximity to an aiport",
+        plural: false,
+        contextName: "airport"
+      }}
+    />
+  ),
+  8: (
+    <Rank
+      options={{
+        stringName: "theme parks",
+        plural: true,
+        contextName: "theme_parks"
+      }}
+    />
+  ),
+  9: (
+    <Rank
+      options={{
+        stringName: "nature",
+        plural: false,
+        contextName: "nature"
+      }}
+    />
+  )
 }
 
 const Steps = ({ step, ...rest }) => {
@@ -40,11 +91,6 @@ const Steps = ({ step, ...rest }) => {
   const ContextValue = useContext(GlobalContext)
   console.log(ContextValue)
 
-  useEffect(() => {
-    // if (ContextValue.isStepReady) {
-    //   ContextValue.handleChange({ field: "isStepReady", value: false })
-    // }
-  }, [step, ContextValue])
   //Wrap Component Here with Animation
   return (
     <div className="ask-page__steps-container" ref={r}>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import classnames from "classnames"
 import "./Ask.css"
 import { Steps, StepMap } from "../Steps"
@@ -12,9 +12,22 @@ const Ask = ({ location, match, history }) => {
   const nextStep = Number(step) + 1
 
   const stepToState = {
-    1: "climate",
-    2: "landscape"
+    1: "state",
+    2: "location",
+    3: "budget",
+    4: "attraction",
+    5: "nightlife",
+    6: "museum",
+    7: "airport",
+    8: "theme_parks",
+    9: "nature"
   }
+
+  useEffect(() => {
+    if (step !== 1 && !GlobalState.location) {
+      history.push("/ask/1")
+    }
+  }, [])
 
   /*
   Get the object from global state and check to see if the current step, as derived from stepToState is filled in
@@ -41,13 +54,14 @@ const Ask = ({ location, match, history }) => {
           )}
           {step < Object.keys(StepMap).length && (
             <button
-              disabled={!isStepReady}
+              disabled={!isStepReady || GlobalState.isStepLoading}
               onClick={handleNext}
               className={classnames("ask-page__navigate ask-page__next", {
-                "ask-page__navigate--inactive": !isStepReady
+                "ask-page__navigate--inactive":
+                  !isStepReady || GlobalState.isStepLoading
               })}
             >
-              Next
+              {GlobalState.isStepLoading ? "Loading... " : "Next"}
             </button>
           )}
         </div>

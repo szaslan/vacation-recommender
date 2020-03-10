@@ -16,6 +16,7 @@ const Attraction = ({ ContextValue }) => {
           }
           role="button"
           className={classnames("step-option", {
+            "step-option--disabled": ContextValue.isStepLoading,
             "step-option--selected": ContextValue.attraction === key
           })}
         >

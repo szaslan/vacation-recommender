@@ -14,27 +14,76 @@
   color: #29298a;
   font-weight: 600;
 }
-.step-option:hover {
+.step-option:hover,
+.rank__option:hover {
   cursor: pointer;
 
   background-color: #d4d4f4;
 }
-.step-option--selected {
+
+.step-option--disabled {
+  background-color: #f0f0f0;
+  color: #5f5f62;
+  pointer-events: none;
+}
+.step-option--selected,
+.rank__option--selected {
   /* background: #562284; */
   background-color: #29298a;
   color: white;
 }
 
-.step-option--selected:hover {
+.step-option--selected:hover,
+.rank__option--selected:hover {
   /* background: #562284; */
   background-color: #29298a;
+}
+
+.rank__options-container::before {
+  content: "I don't ever think about this";
+  position: absolute;
+  font-size: 12px;
+  bottom: -24px;
+  font-weight: 500;
+  left: 0;
+}
+
+.rank__options-container::after {
+  content: "I NEED this to be happy";
+  position: absolute;
+  font-weight: 500;
+  font-size: 12px;
+  bottom: -24px;
+  right: 0;
 }
 
 .rank__options-container {
   display: flex;
   flex-direction: row;
   width: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.rank__option {
   flex: 1;
+  padding: 8px;
+  margin: 8px;
+  border: none;
+  text-decoration: none;
+  background-color: #ececff;
+  color: #29298a;
+  font-weight: 600;
+  border-radius: 10px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.rank__option--selected {
+  background-color: #29298a;
+  color: white;
 }
 
 .rank__option {

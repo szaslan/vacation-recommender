@@ -6,6 +6,7 @@ const State = ({ ContextValue }) => {
     <div>
       <Prompt promptText="What state are you in?" />
       <select
+        style={{ width: "100%" }}
         onChange={e => {
           ContextValue.handleChange({ field: "state", value: e.target.value })
         }}

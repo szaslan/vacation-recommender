@@ -12,6 +12,7 @@ const Rank = ({ options, ContextValue }) => {
     <div>
       <Prompt promptText={`How important ${p} ${stringName}?`} />
       <div className="rank__options-container">
+        {/* <div>Not Important</div> */}
         {ranks.map((rank, i) => {
           return (
             <button
@@ -23,13 +24,14 @@ const Rank = ({ options, ContextValue }) => {
                 })
               }
               className={classnames("rank__option", {
-                "rank__option--selected": false
+                "rank__option--selected": ContextValue[contextName] === rank
               })}
             >
               {rank}
             </button>
           )
         })}
+        {/* <div>I need this to be happy</div> */}
       </div>
     </div>
   )

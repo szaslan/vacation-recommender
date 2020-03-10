@@ -1,0 +1,15 @@
+.result-page__text {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.results-page {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.result-page__text--big {
+  font-size: 4rem;
+}

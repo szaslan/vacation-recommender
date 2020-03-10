@@ -4,6 +4,7 @@ import "./Ask.css"
 import { Steps, StepMap } from "../Steps"
 import { Link, Redirect } from "react-router-dom"
 import { GlobalContext } from "../../Context/GlobalContext"
+import Loader from "../../Components/Loader/Loader"
 
 const Ask = ({ location, match, history }) => {
   const GlobalState = useContext(GlobalContext)
@@ -19,15 +20,21 @@ const Ask = ({ location, match, history }) => {
     5: "nightlife",
     6: "museum",
     7: "airport",
-    8: "theme_parks",
+    8: "theme_park",
     9: "nature"
   }
 
   useEffect(() => {
-    if (step !== 1 && !GlobalState.location) {
+    if (location.pathname !== "/ask/1" && !GlobalState.location) {
       history.push("/ask/1")
     }
   }, [])
+
+  useEffect(() => {
+    if (GlobalState.final_cities) {
+      history.push("/results")
+    }
+  }, [GlobalState.final_cities])
 
   /*
   Get the object from global state and check to see if the current step, as derived from stepToState is filled in
@@ -61,7 +68,18 @@ const Ask = ({ location, match, history }) => {
                   !isStepReady || GlobalState.isStepLoading
               })}
             >
-              {GlobalState.isStepLoading ? "Loading... " : "Next"}
+              {GlobalState.isStepLoading ? <Loader /> : "Next"}
+            </button>
+          )}
+          {step == Object.keys(StepMap).length && (
+            <button
+              className={classnames("ask-page__navigate ask-page__next", {
+                "ask-page__navigate--inactive":
+                  !isStepReady || GlobalState.isStepLoading
+              })}
+              onClick={GlobalState.handleFinish}
+            >
+              {GlobalState.isStepLoading ? <Loader /> : "Find my vacation! 😎"}
             </button>
           )}
         </div>

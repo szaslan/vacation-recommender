@@ -2,7 +2,8 @@ import React, { createContext, useState } from "react"
 import {
   int_continents_query,
   int_budgets_query,
-  dom_budgets_query
+  dom_budgets_query,
+  final_query
 } from "../queries"
 
 export const GlobalContext = createContext({})
@@ -62,6 +63,28 @@ class GlobalContextProvider extends React.Component {
     })
   }
 
+  handleFinish = async () => {
+    /*
+    Get the rankings, then run either domestic or international query for all    
+    */
+    this.setState({ isStepLoading: true })
+    const q = await final_query({
+      codes_list: this.state.place_codes,
+      ranks: {
+        nightlife: this.state.nightlife,
+        museum: this.state.museum,
+        airport: this.state.airport,
+        theme_park: this.state.theme_park,
+        nature: this.state.nature
+      }
+    })
+
+    this.setState({
+      final_cities: q,
+      isStepLoading: false
+    })
+  }
+
   /*
     Need some structure to store state as user progresses, and build query
   */
@@ -100,7 +123,8 @@ class GlobalContextProvider extends React.Component {
     )
   }
   state = {
-    handleChange: this.handleChange
+    handleChange: this.handleChange,
+    handleFinish: this.handleFinish
   }
   render() {
     return (

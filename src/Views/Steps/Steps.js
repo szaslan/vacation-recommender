@@ -10,29 +10,29 @@ import Attraction from "./Attraction"
 import { queries } from "../../queries"
 import "./Steps.css"
 
-const Test = ({ ContextValue }) => {
-  useEffect(() => {
-    const getCities = async () => {
-      const climate = ContextValue.climate
-      const landscape = ContextValue.landscape
-      const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
-        queries[climate][landscape]
-      )}`
+// const Test = ({ ContextValue }) => {
+//   useEffect(() => {
+//     const getCities = async () => {
+//       const climate = ContextValue.climate
+//       const landscape = ContextValue.landscape
+//       const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
+//         queries[climate][landscape]
+//       )}`
 
-      // Object.keys(params).forEach(key =>
-      //   url.searchParams.append(key, params[key])
-      // )
-      let r = await fetch(url, {
-        headers: { Accept: "application/sparql-results+json" }
-      })
-      r = await r.json()
-      console.log(r)
-    }
-    getCities()
-  }, [])
+//       // Object.keys(params).forEach(key =>
+//       //   url.searchParams.append(key, params[key])
+//       // )
+//       let r = await fetch(url, {
+//         headers: { Accept: "application/sparql-results+json" }
+//       })
+//       r = await r.json()
+//       console.log(r)
+//     }
+//     getCities()
+//   }, [])
 
-  return <div>check console dingus</div>
-}
+//   return <div>check console dingus</div>
+// }
 
 export const StepMap = {
   1: <State />,
@@ -71,7 +71,7 @@ export const StepMap = {
       options={{
         stringName: "theme parks",
         plural: true,
-        contextName: "theme_parks"
+        contextName: "theme_park"
       }}
     />
   ),

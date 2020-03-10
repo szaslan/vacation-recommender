@@ -56,14 +56,12 @@ export const dom_budgets_query = async ({ options }) => {
     ${budgets[options.budget]}
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
   }
-  ORDER BY DESC(?pop) LIMIT 10`
-  console.log(q)
+  ORDER BY DESC(?pop) LIMIT 50`
   const url = getUrl(q)
   let r = await fetch(url, {
     headers: headers
   })
   r = await r.json()
-  console.log(r)
   let city_codes = {}
   for (let i of r.results.bindings) {
     const place_code = i.place.value
@@ -90,8 +88,6 @@ export const final_query = async ({ codes_list, ranks }) => {
   const fourRank = Object.keys(rankCopy).reduce((a, b) =>
     rankCopy[a] > rankCopy[b] ? a : b
   )
-
-  console.log(fiveRank, fourRank)
 
   /*
   get top two ranks here
@@ -127,7 +123,6 @@ export const final_query = async ({ codes_list, ranks }) => {
       }
     }
   }
-  console.log(potential_cities)
   return potential_cities
 }
 
@@ -181,7 +176,7 @@ export const int_budgets_query = async ({
         FILTER NOT EXISTS {?country wdt:P31 wd:Q417175}
         FILTER NOT EXISTS {?country wdt:P31 wd:Q5123999}
         SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
-      } LIMIT 10`
+      } LIMIT 50`
   } else if (options.budget === "moderate") {
     // prettier-ignore
     q = `
@@ -196,7 +191,7 @@ export const int_budgets_query = async ({
       FILTER NOT EXISTS {?country wdt:P31 wd:Q417175}
       FILTER NOT EXISTS {?country wdt:P31 wd:Q5123999}
       SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
-    } ORDER BY DESC(?pop) LIMIT 10
+    } ORDER BY DESC(?pop) LIMIT 50
     `
   } else {
     // prettier-ignore
@@ -212,7 +207,7 @@ export const int_budgets_query = async ({
       FILTER NOT EXISTS {?country wdt:P31 wd:Q417175}
       FILTER NOT EXISTS {?country wdt:P31 wd:Q5123999}
       SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
-    } ORDER BY DESC(?pop) LIMIT 10 `
+    } ORDER BY DESC(?pop) LIMIT 50 `
   }
 
   const url = getUrl(q)
@@ -220,7 +215,6 @@ export const int_budgets_query = async ({
     headers: headers
   })
   const budget_data = await r.json()
-  console.log(budget_data)
   let place_codes = {}
   for (let i of budget_data.results.bindings) {
     const item_code = i.item.value

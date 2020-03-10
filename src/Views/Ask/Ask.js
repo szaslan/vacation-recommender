@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import classnames from "classnames"
 import "./Ask.css"
 import { Steps, StepMap } from "../Steps"
@@ -24,6 +24,8 @@ const Ask = ({ location, match, history }) => {
     9: "nature"
   }
 
+  const [slowRequest, setSlowRequest] = useState(false)
+
   useEffect(() => {
     if (location.pathname !== "/ask/1" && !GlobalState.location) {
       history.push("/ask/1")
@@ -35,6 +37,18 @@ const Ask = ({ location, match, history }) => {
       history.push("/results")
     }
   }, [GlobalState.final_cities])
+
+  useEffect(() => {
+    const to = setTimeout(() => {
+      if (GlobalState.isStepLoading) {
+        setSlowRequest(true)
+      }
+    }, 3000)
+    if (!GlobalState.isStepLoading || slowRequest) {
+      setSlowRequest(false)
+      clearTimeout(to)
+    }
+  }, [GlobalState.isStepLoading])
 
   /*
   Get the object from global state and check to see if the current step, as derived from stepToState is filled in
@@ -84,6 +98,11 @@ const Ask = ({ location, match, history }) => {
           )}
         </div>
       </div>
+      {slowRequest && (
+        <div className="ask-page__slow-request">
+          Finding your perfect destination may take a second!
+        </div>
+      )}
     </div>
   )
 }

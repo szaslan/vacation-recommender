@@ -89,7 +89,6 @@ export const StepMap = {
 const Steps = ({ step, ...rest }) => {
   const r = React.useRef(null)
   const ContextValue = useContext(GlobalContext)
-  console.log(ContextValue)
 
   //Wrap Component Here with Animation
   return (

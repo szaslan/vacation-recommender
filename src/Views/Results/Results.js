@@ -18,7 +18,11 @@ const Results = ({ history }) => {
           Oops! We couldn't find a vacation for the preferences you entered.
           Please try again with something different!
         </div>
-        <button className="rank__option" onClick={() => history.push("/ask/1")}>
+        <button
+          className="rank__option"
+          onClick={() => history.push("/ask/1")}
+          style={{ flex: "0 0" }}
+        >
           Start Over
         </button>
       </div>

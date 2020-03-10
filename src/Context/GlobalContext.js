@@ -117,7 +117,7 @@ class GlobalContextProvider extends React.Component {
               this.domBudget()
             }
           default:
-            console.log("def")
+            console.log("default")
         }
       }
     )

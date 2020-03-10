@@ -85,6 +85,11 @@ class GlobalContextProvider extends React.Component {
     })
   }
 
+  restart = () => {
+    const state = this.getInitalState()
+    this.setState(state)
+  }
+
   /*
     Need some structure to store state as user progresses, and build query
   */
@@ -122,10 +127,16 @@ class GlobalContextProvider extends React.Component {
       }
     )
   }
-  state = {
-    handleChange: this.handleChange,
-    handleFinish: this.handleFinish
+
+  getInitalState = () => {
+    return {
+      handleChange: this.handleChange,
+      handleFinish: this.handleFinish,
+      restart: this.restart
+    }
   }
+  state = this.getInitalState()
+
   render() {
     return (
       <GlobalContext.Provider value={this.state}>

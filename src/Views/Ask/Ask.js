@@ -55,7 +55,6 @@ const Ask = ({ location, match, history }) => {
 
   useEffect(() => {
     if (!slowRequest) {
-      console.log("slow false")
       clearTimeout(to)
     }
   }, [slowRequest])

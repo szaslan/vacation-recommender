@@ -11,6 +11,11 @@ const Results = ({ history }) => {
     return <Redirect to="/ask/1" />
   }
 
+  const startOver = () => {
+    GlobalState.handleChange({ field: "final_cities", value: null })
+    history.push("/ask/1")
+  }
+
   if (Object.keys(finalCities).length === 0) {
     return (
       <div className="ask-page-container results-page">
@@ -20,7 +25,7 @@ const Results = ({ history }) => {
         </div>
         <button
           className="rank__option"
-          onClick={() => history.push("/ask/1")}
+          onClick={startOver}
           style={{ flex: "0 0" }}
         >
           Start Over
@@ -36,6 +41,13 @@ const Results = ({ history }) => {
       <div className="result-page__text result-page__text--big">
         {bestCity}!
       </div>
+      <button
+        className="rank__option"
+        onClick={startOver}
+        style={{ flex: "0 0" }}
+      >
+        Start Over
+      </button>
       <iframe
         src={`https://en.wikipedia.org/wiki/${bestCity}`}
         width="100%"

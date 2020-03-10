@@ -26,11 +26,16 @@ const Ask = ({ location, match, history }) => {
 
   const [slowRequest, setSlowRequest] = useState(false)
 
+  const stateStep = stepToState[step]
+  const isStepReady = GlobalState[stateStep]
+
   useEffect(() => {
     if (location.pathname !== "/ask/1" && !GlobalState.location) {
       history.push("/ask/1")
     }
-  }, [])
+    window.addEventListener("keypress", handleEnter)
+    return () => window.removeEventListener("keypress", handleEnter)
+  }, [GlobalState])
 
   useEffect(() => {
     if (GlobalState.final_cities) {
@@ -39,16 +44,39 @@ const Ask = ({ location, match, history }) => {
   }, [GlobalState.final_cities])
 
   useEffect(() => {
-    const to = setTimeout(() => {
-      if (GlobalState.isStepLoading) {
-        setSlowRequest(true)
-      }
-    }, 3000)
-    if (!GlobalState.isStepLoading || slowRequest) {
+    if (GlobalState.isStepLoading) {
+      setTimeout(to, 3000)
+    }
+
+    if (!GlobalState.isStepLoading) {
       setSlowRequest(false)
-      clearTimeout(to)
     }
   }, [GlobalState.isStepLoading])
+
+  useEffect(() => {
+    if (!slowRequest) {
+      console.log("slow false")
+      clearTimeout(to)
+    }
+  }, [slowRequest])
+
+  const handleEnter = e => {
+    if (e.key === "Enter") {
+      if (isStepReady && !GlobalState.isStepLoading) {
+        if (step == Object.keys(StepMap).length) {
+          GlobalState.handleFinish()
+        } else {
+          handleNext()
+        }
+      }
+    }
+  }
+
+  const to = () => {
+    if (GlobalState.isStepLoading) {
+      setSlowRequest(true)
+    } else setSlowRequest(false)
+  }
 
   /*
   Get the object from global state and check to see if the current step, as derived from stepToState is filled in
@@ -57,11 +85,10 @@ const Ask = ({ location, match, history }) => {
     StepName: 'some_value'
   }
   */
-  const stateStep = stepToState[step]
-  const isStepReady = GlobalState[stateStep]
 
   const handleNext = () => {
     history.push(`/ask/${nextStep}`)
+    clearTimeout(to)
   }
   return (
     <div className="ask-page-container">

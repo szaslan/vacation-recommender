@@ -19,10 +19,10 @@ Answer questions based on budget, interests, and current location to get a final
 ## Finding Knowledge and Reasoning:
 
 - Knowledge: Our primary knowledge source was the Wikidata knowledge base.
-- Representation: To store information that we used repeatedly, such as the wikidata identifiers for US states, we wrote    
-  initial queries. These identifiers were stored in global variables used throughout the project. Furthermore, the 
-  user's answers to each question were stored and mapped to both wikidata identifiers and different queries through each step    
-  of the project.  
+- Representation: To store information that we used repeatedly, such as the wikidata identifiers for US states, 
+  we wrote initial queries. These identifiers were stored in global variables used throughout the project. 
+  Furthermore, the user's answers to each question were stored and mapped to both wikidata identifiers and different 
+  queries through each step of the project.  
 - Reasoning: We wrote several SPARQL queries which built on top of each other according to the user's input. These queries can 
   be found in the file queries.js.
   
